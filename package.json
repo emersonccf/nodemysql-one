@@ -1,0 +1,15 @@
+{
+  "name": "nodemysql",
+  "version": "1.0.0",
+  "description": "Tutorial de node com mysql: https://www.luiztools.com.br/post/criando-uma-webapi-com-nodejs-e-mysql/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Emerson Ferreira",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}
