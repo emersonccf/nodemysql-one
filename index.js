@@ -23,11 +23,13 @@ app.use(bodyParser.json())
 
 // defined router and routes
 const router = express.Router()
+
 // defined route root - GET
 router.get('/', (req, res, next) => res.json({
     message: 'Rota raiz funcionando!'
 }))
-// defined route customers - GET
+
+// defined route customers and search customer for id - GET 
 sqlAllCustomers = 'SELECT id, nome, cpf FROM clientes'
 router.get('/clientes/:id?', (req, res, next) => {
     const id = req.params.id
@@ -36,9 +38,17 @@ router.get('/clientes/:id?', (req, res, next) => {
     execSQLQuery(sqlQry, res)
 })
 
+// delete customer for id
 router.delete('/clientes/:id', (req, res, next) => {
     const id = req.params.id
     execSQLQuery('DELETE FROM clientes WHERE id=' + parseInt(id), res)
+})
+
+// register customer in database
+router.post('/clientes', (req, res, next) => {
+    const nome = req.body.nome.substring(0, 150)
+    const cpf = req.body.cpf.substring(0, 11)
+    execSQLQuery(`INSERT INTO clientes(nome, cpf) VALUE ('${nome}', '${cpf}')`, res)
 })
 
 app.use('/', router)
