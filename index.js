@@ -3,6 +3,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mysql = require('mysql')
 const pw = require('./env')
+const {
+    route
+} = require('express/lib/router')
 // create instance app express
 const app = express()
 // ports default for app e bd
@@ -21,16 +24,21 @@ app.use(bodyParser.json())
 // defined router and routes
 const router = express.Router()
 // defined route root - GET
-router.get('/', (req, res) => res.json({
+router.get('/', (req, res, next) => res.json({
     message: 'Rota raiz funcionando!'
 }))
 // defined route customers - GET
 sqlAllCustomers = 'SELECT id, nome, cpf FROM clientes'
-router.get('/clientes/:id?', (req, res) => {
+router.get('/clientes/:id?', (req, res, next) => {
     const id = req.params.id
     let sqlQry = ''
     sqlQry = (id) ? sqlAllCustomers + ' WHERE id=' + parseInt(id) : sqlAllCustomers
     execSQLQuery(sqlQry, res)
+})
+
+router.delete('/clientes/:id', (req, res, next) => {
+    const id = req.params.id
+    execSQLQuery('DELETE FROM clientes WHERE id=' + parseInt(id), res)
 })
 
 app.use('/', router)
