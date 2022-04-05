@@ -6,8 +6,8 @@ const pw = require('./env') // file settings passwords
 const connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
-    user: 'root', // defined where your user
-    password: pw.password, // use where your password 
+    user: 'root', // defined here your user
+    password: pw.passwordBD, // use here your password 
     database: 'nodemysql'
 })
 
