@@ -40,11 +40,11 @@ function createTable(conn) {
 
 // load registers
 function addRows(conn) {
-    const sql = "INSERT INTO Clientes(nome, cpf) VALUES ?";
+    const sql = "INSERT INTO clientes(nome, cpf) VALUES ?";
     const values = [
-        ['Sofia Almeida', '12345678901'],
-        ['Francisco Ferreira', '09876543210'],
-        ['Emerson Catarino', '12312312399']
+        ['Carlos Almeida', '12345678901'],
+        ['Ana Santos', '09876543210'],
+        ['Emerson Ferreira', '12312312399']
     ];
     conn.query(sql, [values], function (error, results, fields) {
         if (error) return console.log(error);
