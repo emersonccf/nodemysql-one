@@ -25,8 +25,12 @@ router.get('/', (req, res) => res.json({
     message: 'Rota raiz funcionando!'
 }))
 // defined route customers - GET
-router.get('/clientes', (req, res) => {
-    execSQLQuery('SELECT id, nome, cpf FROM clientes', res)
+sqlAllCustomers = 'SELECT id, nome, cpf FROM clientes'
+router.get('/clientes/:id?', (req, res) => {
+    const id = req.params.id
+    let sqlQry = ''
+    sqlQry = (id) ? sqlAllCustomers + ' WHERE id=' + parseInt(id) : sqlAllCustomers
+    execSQLQuery(sqlQry, res)
 })
 
 app.use('/', router)
