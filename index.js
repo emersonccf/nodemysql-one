@@ -51,6 +51,14 @@ router.post('/clientes', (req, res, next) => {
     execSQLQuery(`INSERT INTO clientes(nome, cpf) VALUE ('${nome}', '${cpf}')`, res)
 })
 
+// update data customer in database
+router.patch('/clientes/:id', (req, res, next) => {
+    const id = parseInt(req.params.id)
+    const nome = req.body.nome.substring(0, 150)
+    const cpf = req.body.cpf.substring(0, 11)
+    execSQLQuery(`UPDATE clientes SET nome='${nome}', cpf='${cpf}' WHERE id=${id}`, res)
+})
+
 app.use('/', router)
 
 // launch sever in port default
